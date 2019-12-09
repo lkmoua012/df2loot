@@ -1,0 +1,13 @@
+MELEE WEAPONS
+2x4
+Iron Pipe
+Baseball Bat
+Wrench
+Shovel
+Crowbar
+Pick Axe
+Nail Bat
+Axe
+Sledge Hammer
+Machete
+Longsword
