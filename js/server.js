@@ -23,13 +23,13 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     var missionObj = $(element).children("td:nth-child(5)").text();
     var missionGuide = $(element).find("div.guide-text").text();
     var missionExp = $(element).children("td:nth-child(15)").text();
-    var missionText = missionBuilding + "- " + missionObj;
+    var missionText = missionCity + " - " + missionBuilding + "- " + missionObj;
 
     var originBuilding = $(element).children("td:nth-child(11)").text();
     var originCity = $(element).children("td:nth-child(12)").text().toUpperCase();
     var originPerson = $(element).children("td:nth-child(10)").text();
     var originGuide = $(element).find("td.col-origin-location").text();
-    var originText = originPerson + " - " + originBuilding;
+    var originText = originCity + " - " + originBuilding + " - " + originPerson;
 
     if (missionGuide == ""){
         missionGuide = "No guide available yet."
