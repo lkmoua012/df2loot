@@ -84,73 +84,78 @@ console.log("\n***********************************\n" +
   route.rich = [];
   route.smoor = [];
   route.wmole = [];
-  route.final = [];
+  route.final = ["Hello world"];
   route.return = [];
-  
-  // Run function to analyze the results and push into the final route array.
+
+// ----------
+// FUNCTIONS LISTED BELOW
+// ----------
 
   function createRoute(){
     for (i=0; i < results.length; i++){
 
-        if (results[i].missionCity=="DAWNHILL"){
-          route.dawn.push(results[i].missionCity + " --- " + results[i].missionText + " ----- " + results[i].missionGuide);
+        if (results[i].missionCity=="DAWNHILL" || results[i].originCity=="DAWNHILL" ){
+          route.dawn.push(results[i]);
         };
 
-        if (results[i].originCity=="DAWNHILL"){
-          route.dawn.push(results[i].originCity + " --- TALK: " + results[i].originText + " ----- " + results[i].originGuide);
+        if (results[i].missionCity=="LERWILLBURY" || results[i].originCity=="LERWILLBURY" ){
+          route.lerw.push(results[i]);
         };
 
-        if (results[i].missionCity=="LERWILLBURY"){
-          route.lerw.push(results[i].missionCity + " --- " + results[i].missionText + " ----- " + results[i].missionGuide);
+        if (results[i].missionCity=="RICHBOW HUNT" || results[i].originCity=="RICHBOW HUNT" ){
+          route.rich.push(results[i]);
         };
 
-        if (results[i].originCity=="LERWILLBURY"){
-          route.lerw.push(results[i].originCity + " --- TALK: " + results[i].originText + " ----- " + results[i].originGuide);
+        if (results[i].missionCity=="GREYWOOD" || results[i].originCity=="GREYWOOD" ){
+          route.grey.push(results[i]);
         };
 
-        if (results[i].missionCity=="RICHBOW HUNT"){
-          route.rich.push(results[i].missionCity + " --- " + results[i].missionText + " ----- " + results[i].missionGuide);
+        if (results[i].missionCity=="ALBANDALE PARK" || results[i].originCity=="ALBANDALE PARK"){
+          route.alban.push(results[i]);
         };
-
-        if (results[i].originCity=="RICHBOW HUNT"){
-          route.rich.push(results[i].originCity + " --- TALK: " + results[i].originText + " ----- " + results[i].originGuide);
-        };
-
-        if (results[i].missionCity=="GREYWOOD"){
-          route.grey.push(results[i].missionCity + " --- " + results[i].missionText + " ----- " + results[i].missionGuide);
-        };
-
-        if (results[i].originCity=="GREYWOOD"){
-          route.grey.push(results[i].originCity + " --- TALK: " + results[i].originText + " ----- " + results[i].originGuide);
-        };
-
-        if (results[i].missionCity=="ALBANDALE PARK"){
-          route.alban.push(results[i].missionCity + " --- " + results[i].missionText + " ----- " + results[i].missionGuide);
-        };
-
-        if (results[i].originCity=="ALBANDALE PARK"){
-          route.alban.push(results[i].originCity + " --- TALK: " + results[i].originText + " ----- " + results[i].originGuide);
-        };
-
-        // Check Mission City
-
-        // Check Origin City
-
     }
+  };
+/*
+  function tallyRoute(){
 
-  // For loop to go through all missions.
+    var arch = route.arch.length;
+    var alban = route.alban.length;
+    var coop = route.coop.length;
+    var dawn = route.dawn.length;
+    var dunt = route.dunt.length;
+    var grey = route.grey.length;
+    var have = route.have.length;
+    var lerw = route.lerw.length;
+    var rave = route.rave.length;
+    var rich = route.rich.length;
+    var wmole = route.wmole.length;
 
+    // Go through each key in the Route object.
+    // Tally missions per city count
   }
+*/
 
+// ----------
+// END OF ALL FUNCTIONS
+// ----------
+
+  // Run functions to analyze the results and push into the final route array.
   createRoute();
   console.log(route);
   console.log("\n***********************************\n" +
             "Generating route based on locations...\n" +
             "\n***********************************\n");
+  tallyRoute();
+  console.log(route.final);
+  console.log("\n***********************************\n" +
+            "END\n" +
+            "\n***********************************\n");
 
+
+//AXIOS THEN RESPONSE CLOSING TAG. DO NOT DELETE.
 });
 
-/*
+/* -Pseudo Code-
 Grab each row.
 Separate each column into their respective categories.
 Separate into their cities.
