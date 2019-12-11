@@ -5,7 +5,7 @@ var axios = require("axios");
 
 // First, tell the console what server.js is doing
 console.log("\n***********************************\n" +
-            "Grabbing every mission giving > 2500 xp\n" +
+            "Grabbing every mission giving > 2000 xp\n" +
             "from DF2 Haven:" +
             "\n***********************************\n");
 
@@ -40,10 +40,11 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     };
 
     // If EXP is greater than 2500 and is not Extermination, push results.
-    if (Number(missionExp) > 2500 && missionObj !== "Exterminate"){
+    if (Number(missionExp) > 2000 && missionObj !== "Exterminate"){
             results.push({
                 missionExp: missionExp,
                 missionCity: missionCity,
+                missionBuilding: missionBuilding,
                 missionObj: missionObj,
                 missionGuide: missionGuide,
                 missionText: missionText,
@@ -145,7 +146,6 @@ console.log("\n***********************************\n" +
   console.log("\n***********************************\n" +
             "Generating route based on locations...\n" +
             "\n***********************************\n");
-  tallyRoute();
   console.log(route.final);
   console.log("\n***********************************\n" +
             "END\n" +
