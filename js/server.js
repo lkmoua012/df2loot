@@ -78,15 +78,34 @@ console.log("\n***********************************\n" +
 // ----------
 
   function createRoute(){
+
+    var counter = 0;
+
     for (i=0; i < results.length; i++){
 
       // if the optimal route has a quest, compare
 
       if (route.length == 0){
-        console.log("Hey I'm empty");
         route.push(results[i]);
-      } else {
-        console.log("Hey I'm not empty anymore.");
+        console.log("I'm pushing " + results[i].missionText);
+      }
+      else {
+
+        if (results[i].originCity == route[counter].originCity){
+          route.push(results[i]);
+          console.log("I'm pushing " + results[i].missionText);
+        } else 
+        if (results[i].missionCity == route[counter].originCity){
+          route.unshift(results[i]);
+          console.log("I'm pushing " + results[i].missionText);
+        } else
+        if (results[i].missionCity == route[counter].missionCity){
+          route.push(results[i]);
+          console.log("I'm pushing " + results[i].missionText);
+        } else {
+          route.push(results[i]);
+          console.log("I'm pushing " + results[i].missionText);
+        }
       }
 
     }
