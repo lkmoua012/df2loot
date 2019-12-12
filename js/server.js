@@ -67,7 +67,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
 console.log("\n***********************************\n" +
             "Pushing all missions\n" +
-            "into their respective cities..." +
+            "into the optimal route..." +
             "\n***********************************\n");
 
   // Object containing the optimal route.
@@ -79,33 +79,38 @@ console.log("\n***********************************\n" +
 
   function createRoute(){
 
-    var counter = 0;
-
     for (i=0; i < results.length; i++){
+      console.log("Hello world");
 
-      // if the optimal route has a quest, compare
-
-      if (route.length == 0){
+      // if the optimal route is emtpy, push.
+      if (route.length === 0){
         route.push(results[i]);
-        console.log("I'm pushing " + results[i].missionText);
+        console.log("I'm pushing " + results[i].missionText + " into the optimal route");
       }
-      else {
 
-        if (results[i].originCity == route[counter].originCity){
-          route.push(results[i]);
-          console.log("I'm pushing " + results[i].missionText);
-        } else 
-        if (results[i].missionCity == route[counter].originCity){
-          route.unshift(results[i]);
-          console.log("I'm pushing " + results[i].missionText);
-        } else
-        if (results[i].missionCity == route[counter].missionCity){
-          route.push(results[i]);
-          console.log("I'm pushing " + results[i].missionText);
-        } else {
-          route.push(results[i]);
-          console.log("I'm pushing " + results[i].missionText);
-        }
+      // otherwise compare
+      else {
+ 
+          if (results[i].originCity === route[i-1].originCity){
+            console.log("I'm splicing " + results[i].missionText + " ---below--- " + route[i-1].missionText);
+            route.splice(i, 0, results[i]);
+          } else 
+          if (results[i].missionCity === route[i-1].originCity){
+            console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[i-1].missionText);
+            route.splice(i-1, 0, results[i]);
+          } else
+          if (results[i].missionCity === route[i-1].missionCity){
+            console.log("I'm pushing2 " + results[i].missionText + " ---below--- " + route[i-1].missionText);
+            route.splice(i, 0, results[i]);
+          } else
+          if (results[i].originCity === route[i-1].missionCity){
+            console.log("I'm pushing3 " + results[i].missionText + " ---below--- " + route[i-1].missionText);
+            route.splice(i, 0, results[i]);
+          }else {
+            console.log("I'm pushing4 " + results[i].missionText);
+            route.push(results[i]);
+          }
+
       }
 
     }
@@ -113,6 +118,9 @@ console.log("\n***********************************\n" +
 
       /*
       Essentially, if a city is equal to another in the array, it'll place the quest ahead or below.
+
+      -- Current Issue --
+      i is increasing and the later quest results are only comparing itself to the later quests, not to all of the route array.
       */
 
 
