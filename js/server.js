@@ -80,7 +80,9 @@ console.log("\n***********************************\n" +
   function createRoute(){
 
     for (i=0; i < results.length; i++){
+      console.log("\n***********************************\n");
       console.log("This is the current i: " + i);
+      console.log("This is the length of the optimal route: " + route.length);
       // if the optimal route is emtpy, push.
       if (route.length === 0){
         route.push(results[i]);
@@ -91,8 +93,8 @@ console.log("\n***********************************\n" +
       else {
 
         for (j=0; j < route.length; j++){
-
-        console.log("This is the length of the optimal route: " + route.length);
+        console.log("\n***********************************\n");
+        console.log("This is j: " + j);
 
           if (results[i].originCity === route[j].originCity){
             console.log("I'm splicing " + results[i].missionText + " ---below--- " + route[i-1].missionText);
