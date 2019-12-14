@@ -80,8 +80,7 @@ console.log("\n***********************************\n" +
   function createRoute(){
 
     for (i=0; i < results.length; i++){
-      console.log("Hello world");
-
+      console.log("This is the current i: " + i);
       // if the optimal route is emtpy, push.
       if (route.length === 0){
         route.push(results[i]);
@@ -90,27 +89,41 @@ console.log("\n***********************************\n" +
 
       // otherwise compare
       else {
- 
-          if (results[i].originCity === route[i-1].originCity){
+
+        for (j=0; j < route.length; j++){
+
+        console.log("This is the length of the optimal route: " + route.length);
+
+          if (results[i].originCity === route[j].originCity){
             console.log("I'm splicing " + results[i].missionText + " ---below--- " + route[i-1].missionText);
             route.splice(i, 0, results[i]);
-          } else 
-          if (results[i].missionCity === route[i-1].originCity){
+            break;
+          } else
+
+          if (results[i].missionCity === route[j].originCity){
             console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[i-1].missionText);
             route.splice(i-1, 0, results[i]);
+            break;
           } else
-          if (results[i].missionCity === route[i-1].missionCity){
+
+          if (results[i].missionCity === route[j].missionCity){
             console.log("I'm pushing2 " + results[i].missionText + " ---below--- " + route[i-1].missionText);
             route.splice(i, 0, results[i]);
+            break;
           } else
-          if (results[i].originCity === route[i-1].missionCity){
+
+          if (results[i].originCity === route[j].missionCity){
             console.log("I'm pushing3 " + results[i].missionText + " ---below--- " + route[i-1].missionText);
             route.splice(i, 0, results[i]);
-          }else {
-            console.log("I'm pushing4 " + results[i].missionText);
-            route.push(results[i]);
+            break;
           }
 
+          else {
+            console.log("I'm pushing4 " + results[i].missionText);
+            route.push(results[i]);
+            break;
+          }
+        }
       }
 
     }
@@ -142,9 +155,3 @@ console.log("\n***********************************\n" +
 
 //AXIOS THEN RESPONSE CLOSING TAG. DO NOT DELETE.
 });
-
-/* -Pseudo Code-
-Grab each row.
-Separate each column into their respective categories.
-Separate into their cities.
-*/
