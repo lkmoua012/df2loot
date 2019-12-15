@@ -40,7 +40,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     };
 
     // If EXP is greater than 2500 and is not Extermination, push results.
-    if (Number(missionExp) > 2000 && missionObj !== "Exterminate"){
+    if (Number(missionExp) > 2500 && missionObj !== "Exterminate"){
             results.push({
                 missionExp: missionExp,
                 missionCity: missionCity,
@@ -65,7 +65,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
   // Log the results once you've looped through each of the elements found with cheerio
   console.log(results);
 
-console.log("\n***********************************\n" +
+  console.log("\n***********************************\n" +
             "Pushing all missions\n" +
             "into the optimal route..." +
             "\n***********************************\n");
@@ -79,55 +79,70 @@ console.log("\n***********************************\n" +
 
   function createRoute(){
 
+    console.log("\n***********************************\n");
+    console.log("There are " + results.length + " quests in the results.");
+    console.log("\n***********************************\n");
+
     for (i=0; i < results.length; i++){
       console.log("\n***********************************\n");
-      console.log("This is the current i: " + i);
+      console.log("This is the current quest index in the results route: " + i);
       console.log("This is the length of the optimal route: " + route.length);
+      console.log("\n***********************************\n");
       // if the optimal route is emtpy, push.
       if (route.length === 0){
         route.push(results[i]);
-        console.log("I'm pushing " + results[i].missionText + " into the optimal route");
-      }
+        console.log("Because it is emtpy, I'm pushing " + results[i].missionText + " into the optimal route");
+      } else {
 
       // otherwise compare
-      else {
 
         for (j=0; j < route.length; j++){
-        console.log("\n***********************************\n");
-        console.log("This is j: " + j);
+          console.log("\n***********************************\n");
+          console.log("This is j: " + j);
+          console.log("This is the length of the j route: " + route.length);
 
-          if (results[i].originCity === route[j].originCity){
-            console.log("I'm splicing " + results[i].missionText + " ---below--- " + route[i-1].missionText);
-            route.splice(i, 0, results[i]);
-            break;
-          } else
+            if (results[i].originCity === route[j].originCity){
+              console.log("I'm splicing " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the origin is equal to the origin.");
+              route.splice(i, 0, results[i]);
+              console.log("\n***********************************\n");
+              break;
+            } else
 
-          if (results[i].missionCity === route[j].originCity){
-            console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[i-1].missionText);
-            route.splice(i-1, 0, results[i]);
-            break;
-          } else
+            if (results[i].missionCity === route[j].originCity){
+              console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the mission is equal to the origin.");
+              route.splice(i, 0, results[i]);
+              console.log("\n***********************************\n");
+              break;
+            } else
 
-          if (results[i].missionCity === route[j].missionCity){
-            console.log("I'm pushing2 " + results[i].missionText + " ---below--- " + route[i-1].missionText);
-            route.splice(i, 0, results[i]);
-            break;
-          } else
+            if (results[i].missionCity === route[j].missionCity){
+              console.log("I'm pushing2 " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the mission is equal to the mission.");
+              route.splice(i, 0, results[i]);
+              console.log("\n***********************************\n");
+              break;
+            } else
 
-          if (results[i].originCity === route[j].missionCity){
-            console.log("I'm pushing3 " + results[i].missionText + " ---below--- " + route[i-1].missionText);
-            route.splice(i, 0, results[i]);
-            break;
-          }
+            if (results[i].originCity === route[j].missionCity){
+              console.log("I'm pushing3 " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the origin is equal to the mission.");
+              route.splice(i, 0, results[i]);
+              console.log("\n***********************************\n");
+              break;
+            } else
 
-          else {
-            console.log("I'm pushing4 " + results[i].missionText);
-            route.push(results[i]);
-            break;
-          }
+            if (j!==route.length-1){
+              console.log("\nGo back to the beginning!\n");
+              console.log("\n***********************************\n");
+              continue;
+            } else
+            {
+              console.log("I'm pushing4 " + results[i].missionText);
+              route.push(results[i]);
+              console.log("\n***********************************\n");
+              break;
+            }
+
         }
       }
-
     }
   };
 
@@ -149,7 +164,7 @@ console.log("\n***********************************\n" +
   console.log("\n***********************************\n" +
             "Generating route based on locations...\n" +
             "\n***********************************\n");
-  console.log("Hello world");
+  console.log("There are " + route.length + " quests in the optimal route.");
   console.log("\n***********************************\n" +
             "END\n" +
             "\n***********************************\n");
