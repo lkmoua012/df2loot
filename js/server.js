@@ -40,7 +40,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     };
 
     // If EXP is greater than 2500 and is not Extermination, push results.
-    if (Number(missionExp) > 2500 && missionObj !== "Exterminate"){
+    if (Number(missionExp) > 2500 && missionObj !== "Exterminate" && missionExp !== ""){
             results.push({
                 missionExp: missionExp,
                 missionCity: missionCity,
@@ -91,7 +91,10 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
       // if the optimal route is emtpy, push.
       if (route.length === 0){
         route.push(results[i]);
-        console.log("Because it is emtpy, I'm pushing " + results[i].missionText + " into the optimal route");
+        console.log("Because it is empty, I'm pushing " + results[i].missionText + " into the optimal route");
+        console.log("\n***********************************\n");
+        console.log(route);
+        console.log("\n***********************************\n");
       } else {
 
       // otherwise compare
@@ -102,29 +105,37 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
           console.log("This is the length of the j route: " + route.length);
 
             if (results[i].originCity === route[j].originCity){
-              console.log("I'm splicing " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the origin is equal to the origin.");
-              route.splice(i+1, 0, results[i]);
+              console.log("I'm splicing " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the origin is equal to the origin.");
+              route.splice(i-1, 0, results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
               console.log("\n***********************************\n");
               break;
             } else
 
             if (results[i].missionCity === route[j].originCity){
               console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the mission is equal to the origin.");
-              route.splice(i+1, 0, results[i]);
+              route.splice(i-1, 0, results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
               console.log("\n***********************************\n");
               break;
             } else
 
             if (results[i].missionCity === route[j].missionCity){
-              console.log("I'm pushing2 " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the mission is equal to the mission.");
-              route.splice(i+1, 0, results[i]);
+              console.log("I'm pushing2 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the mission is equal to the mission.");
+              route.splice(i-1, 0, results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
               console.log("\n***********************************\n");
               break;
             } else
 
             if (results[i].originCity === route[j].missionCity){
-              console.log("I'm pushing3 " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the origin is equal to the mission.");
-              route.splice(i+1, 0, results[i]);
+              console.log("I'm pushing3 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the origin is equal to the mission.");
+              route.splice(i-1, 0, results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
               console.log("\n***********************************\n");
               break;
             } else
@@ -137,6 +148,8 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
             {
               console.log("I'm pushing4 " + results[i].missionText);
               route.push(results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
               console.log("\n***********************************\n");
               break;
             }
@@ -160,7 +173,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
   // Run functions to analyze the results and push into the final route array.
   createRoute();
-  // console.log(route);
+  console.log(route);
   console.log("\n***********************************\n" +
             "Generating route based on locations...\n" +
             "\n***********************************\n");
