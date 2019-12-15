@@ -103,28 +103,28 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
             if (results[i].originCity === route[j].originCity){
               console.log("I'm splicing " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the origin is equal to the origin.");
-              route.splice(i, 0, results[i]);
+              route.splice(i+1, 0, results[i]);
               console.log("\n***********************************\n");
               break;
             } else
 
             if (results[i].missionCity === route[j].originCity){
               console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the mission is equal to the origin.");
-              route.splice(i, 0, results[i]);
+              route.splice(i+1, 0, results[i]);
               console.log("\n***********************************\n");
               break;
             } else
 
             if (results[i].missionCity === route[j].missionCity){
               console.log("I'm pushing2 " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the mission is equal to the mission.");
-              route.splice(i, 0, results[i]);
+              route.splice(i+1, 0, results[i]);
               console.log("\n***********************************\n");
               break;
             } else
 
             if (results[i].originCity === route[j].missionCity){
               console.log("I'm pushing3 " + results[i].missionText + " ---below--- " + route[i-1].missionText + " because the origin is equal to the mission.");
-              route.splice(i, 0, results[i]);
+              route.splice(i+1, 0, results[i]);
               console.log("\n***********************************\n");
               break;
             } else
@@ -150,7 +150,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
       Essentially, if a city is equal to another in the array, it'll place the quest ahead or below.
 
       -- Current Issue --
-      i is increasing and the later quest results are only comparing itself to the later quests, not to all of the route array.
+      the pushing4 route is still active even after shifting the results.
       */
 
 
@@ -160,7 +160,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
   // Run functions to analyze the results and push into the final route array.
   createRoute();
-  console.log(route);
+  // console.log(route);
   console.log("\n***********************************\n" +
             "Generating route based on locations...\n" +
             "\n***********************************\n");
