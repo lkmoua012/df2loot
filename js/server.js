@@ -105,8 +105,8 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
           console.log("This is the length of the j route: " + route.length);
 
             if (results[i].originCity === route[j].originCity){
-              console.log("I'm splicing " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the origin is equal to the origin.");
-              route.splice(j-1, 0, results[i]);
+              console.log("I'm splicing " + results[i].missionText + " ---above--- " + route[j].missionText + " because the origin is equal to the origin.");
+              route.splice(route.length-1, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
@@ -114,8 +114,8 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
             } else
 
             if (results[i].missionCity === route[j].originCity){
-              console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the mission is equal to the origin.");
-              route.splice(j-1, 0, results[i]);
+              console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[j].missionText + " because the mission is equal to the origin.");
+              route.splice(route.length-1, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
@@ -123,8 +123,8 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
             } else
 
             if (results[i].missionCity === route[j].missionCity){
-              console.log("I'm pushing2 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the mission is equal to the mission.");
-              route.splice(j-1, 0, results[i]);
+              console.log("I'm pushing2 " + results[i].missionText + " ---above--- " + route[j].missionText + " because the mission is equal to the mission.");
+              route.splice(route.length-1, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
@@ -132,8 +132,8 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
             } else
 
             if (results[i].originCity === route[j].missionCity){
-              console.log("I'm pushing3 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the origin is equal to the mission.");
-              route.splice(j-1, 0, results[i]);
+              console.log("I'm pushing3 " + results[i].missionText + " ---above--- " + route[j].missionText + " because the origin is equal to the mission.");
+              route.splice(route.length-1, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
@@ -163,7 +163,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
       Essentially, if a city is equal to another in the array, it'll place the quest ahead or below.
 
       -- Current Issue --
-      the pushing4 route is still active even after shifting the results.
+      console log is correct, but the results are pushing and splicing incorrectly. need to find out how to track j and i.
       */
 
 
