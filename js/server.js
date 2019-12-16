@@ -106,7 +106,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
             if (results[i].originCity === route[j].originCity){
               console.log("I'm splicing " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the origin is equal to the origin.");
-              route.splice(i-1, 0, results[i]);
+              route.splice(j-1, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
@@ -115,7 +115,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
             if (results[i].missionCity === route[j].originCity){
               console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the mission is equal to the origin.");
-              route.splice(i-1, 0, results[i]);
+              route.splice(j-1, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
@@ -124,7 +124,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
             if (results[i].missionCity === route[j].missionCity){
               console.log("I'm pushing2 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the mission is equal to the mission.");
-              route.splice(i-1, 0, results[i]);
+              route.splice(j-1, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
@@ -133,7 +133,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
             if (results[i].originCity === route[j].missionCity){
               console.log("I'm pushing3 " + results[i].missionText + " ---above--- " + route[i-1].missionText + " because the origin is equal to the mission.");
-              route.splice(i-1, 0, results[i]);
+              route.splice(j-1, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
