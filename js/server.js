@@ -40,7 +40,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     };
 
     // If EXP is greater than 2500 and is not Extermination, push results.
-    if (Number(missionExp) > 2000 && missionObj !== "Exterminate" && missionExp !== ""){
+    if (Number(missionExp) < 250 && missionObj !== "Exterminate" && missionExp !== ""){
             results.push({
                 missionExp: missionExp,
                 missionCity: missionCity,
@@ -72,7 +72,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
   // Object containing the optimal route.
   var route = [];
-  var noGuide =[];
+  var noGuide = 0;
 
 // ----------
 // FUNCTIONS
@@ -220,7 +220,34 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
     console.log("There are " + route.length + " quests in the optimal route.");
 
-    
+    for (i=0; i < route.length; i++){
+
+      console.log("\n***********************************\n");
+      console.log("I am on this quest: " + JSON.stringify(route[i]));
+      console.log("\n***********************************\n");
+
+      if (route[i].originGuide == "No guide available yet." || route[i].missionGuide == "No guide available yet."){
+
+        console.log("I am removing this quest.");
+        console.log("\n***********************************\n");
+      //  console.log("\n***********************************\n");
+      //  console.log(route[i].originCity + ": Talk to " + route[i].originPerson + " in " + route[i].originBuilding);
+      //  console.log("GUIDE: " + route[i].originGuide);
+
+        for (j=route.length-1; j--;){
+          route.splice(j,1);
+        }; 
+
+        noGuide++;
+
+      };
+
+    };
+
+    console.log("\n***********************************\n");
+    console.log("There are " + noGuide + " quests with no guides.");
+    console.log("\n***********************************\n");
+
   };
 
       /*
