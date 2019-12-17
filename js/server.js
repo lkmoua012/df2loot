@@ -40,7 +40,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     };
 
     // If EXP is greater than 2500 and is not Extermination, push results.
-    if (Number(missionExp) > 2500 && missionObj !== "Exterminate" && missionExp !== ""){
+    if (Number(missionExp) > 2000 && missionObj !== "Exterminate" && missionExp !== ""){
             results.push({
                 missionExp: missionExp,
                 missionCity: missionCity,
@@ -72,6 +72,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
 
   // Object containing the optimal route.
   var route = [];
+  var noGuide =[];
 
 // ----------
 // FUNCTIONS
@@ -82,6 +83,85 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     console.log("\n***********************************\n");
     console.log("There are " + results.length + " quests in the results.");
     console.log("\n***********************************\n");
+
+    /* ------ORIGINAL------
+    for (i=0; i < results.length; i++){
+      console.log("\n***********************************\n");
+      console.log("This is the current quest index in the results route: " + i);
+      console.log("This is the length of the optimal route: " + route.length);
+      console.log("\n***********************************\n");
+      // if the optimal route is emtpy, push.
+      if (route.length === 0){
+        route.push(results[i]);
+        console.log("Because it is empty, I'm pushing " + results[i].missionText + " into the optimal route");
+        console.log("\n***********************************\n");
+        console.log(route);
+        console.log("\n***********************************\n");
+      } else {
+
+      // otherwise compare
+
+        for (j=0; j < route.length; j++){
+          console.log("\n***********************************\n");
+          console.log("This is j: " + j);
+          console.log("This is the length of the j route: " + route.length);
+          console.log("This is the splicing formula: " + route.length + " - " + i);
+          console.log("This is the pushing formula: " + route.length + " - " + "1");
+          console.log("\n***********************************\n");
+
+            if (results[i].originCity === route[j].originCity){
+              console.log("I'm splicing " + results[i].missionText + " ---above--- " + route[j].missionText + " because the origin is equal to the origin.");
+              route.splice(j, 0, results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
+              console.log("\n***********************************\n");
+              break;
+            } else
+
+            if (results[i].missionCity === route[j].originCity){
+              console.log("I'm pushing1 " + results[i].missionText + " ---near--- " + route[j].missionText + " because the mission is equal to the origin.");
+              route.splice(route.length-1, 0, results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
+              console.log("\n***********************************\n");
+              break;
+            } else
+
+            if (results[i].missionCity === route[j].missionCity){
+              console.log("I'm pushing2 " + results[i].missionText + " ---near--- " + route[j].missionText + " because the mission is equal to the mission.");
+              route.splice(route.length-1, 0, results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
+              console.log("\n***********************************\n");
+              break;
+            } else
+
+            if (results[i].originCity === route[j].missionCity){
+              console.log("I'm pushing3 " + results[i].missionText + " ---below--- " + route[j].missionText + " because the origin is equal to the mission.");
+              route.splice(j, 0, results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
+              console.log("\n***********************************\n");
+              break;
+            } else
+
+            if (j!==route.length-1){
+              console.log("\nGo back to the beginning!\n");
+              console.log("\n***********************************\n");
+              continue;
+            } else
+            {
+              console.log("I'm pushing4 " + results[i].missionText);
+              route.push(results[i]);
+              console.log("\n***********************************\n");
+              console.log(route);
+              console.log("\n***********************************\n");
+              break;
+            }
+
+        }
+      }
+    }*/
 
     for (i=0; i < results.length; i++){
       console.log("\n***********************************\n");
@@ -103,37 +183,14 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
           console.log("\n***********************************\n");
           console.log("This is j: " + j);
           console.log("This is the length of the j route: " + route.length);
+          console.log("\n***********************************\n");
 
-            if (results[i].originCity === route[j].originCity){
-              console.log("I'm splicing " + results[i].missionText + " ---above--- " + route[j].missionText + " because the origin is equal to the origin.");
-              route.splice(route.length-1, 0, results[i]);
-              console.log("\n***********************************\n");
-              console.log(route);
-              console.log("\n***********************************\n");
-              break;
-            } else
-
-            if (results[i].missionCity === route[j].originCity){
-              console.log("I'm pushing1 " + results[i].missionText + " ---above--- " + route[j].missionText + " because the mission is equal to the origin.");
-              route.splice(route.length-1, 0, results[i]);
-              console.log("\n***********************************\n");
-              console.log(route);
-              console.log("\n***********************************\n");
-              break;
-            } else
-
-            if (results[i].missionCity === route[j].missionCity){
-              console.log("I'm pushing2 " + results[i].missionText + " ---above--- " + route[j].missionText + " because the mission is equal to the mission.");
-              route.splice(route.length-1, 0, results[i]);
-              console.log("\n***********************************\n");
-              console.log(route);
-              console.log("\n***********************************\n");
-              break;
-            } else
-
-            if (results[i].originCity === route[j].missionCity){
-              console.log("I'm pushing3 " + results[i].missionText + " ---above--- " + route[j].missionText + " because the origin is equal to the mission.");
-              route.splice(route.length-1, 0, results[i]);
+            if (results[i].originCity === route[j].originCity
+              || results[i].missionCity === route[j].originCity
+              || results[i].missionCity === route[j].missionCity
+              || results[i].originCity === route[j].missionCity){
+              console.log("I'm splicing " + results[i].missionText + " ---above--- " + route[j].missionText + " because of reasons.");
+              route.splice(j, 0, results[i]);
               console.log("\n***********************************\n");
               console.log(route);
               console.log("\n***********************************\n");
@@ -146,7 +203,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
               continue;
             } else
             {
-              console.log("I'm pushing4 " + results[i].missionText);
+              console.log("I'm pushing4 " + results[i].missionText + " because it doesn't match with anything in the route.");
               route.push(results[i]);
               console.log("\n***********************************\n");
               console.log(route);
