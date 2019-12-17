@@ -219,29 +219,31 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
   function generateRoute(){
 
     console.log("There are " + route.length + " quests in the optimal route.");
+    console.log("\n***********************************\n");
 
     for (i=0; i < route.length; i++){
 
-      console.log("\n***********************************\n");
-      console.log("I am on this quest: " + JSON.stringify(route[i]));
-      console.log("\n***********************************\n");
-
-      if (route[i].originGuide == "No guide available yet." || route[i].missionGuide == "No guide available yet."){
-
-        console.log("I am removing this quest.");
-        console.log("\n***********************************\n");
-      //  console.log("\n***********************************\n");
-      //  console.log(route[i].originCity + ": Talk to " + route[i].originPerson + " in " + route[i].originBuilding);
-      //  console.log("GUIDE: " + route[i].originGuide);
-
-        for (j=route.length-1; j--;){
-          route.splice(j,1);
-        }; 
-
+      if (route[i].missionGuide == "No guide available yet." && route[i].originGuide == "No guide available yet."){
+        console.log("Awful! There's no guides for either.");
         noGuide++;
-
+        route.splice(i, 1);
+        break;
       };
 
+      if (route[i].missionGuide == "No guide available yet."){
+        console.log("No guide available for this mission.");
+        noGuide++;
+        route.splice(i, 1);
+        break;
+      };
+
+      if (route[i].originGuide == "No guide available yet."){
+        console.log("No guide available for the giver.");
+        noGuide++;
+        route.splice(i, 1);
+        break;
+      };
+      
     };
 
     console.log("\n***********************************\n");
@@ -272,7 +274,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
   console.log("\n***********************************\n" +
             "END\n" +
             "\n***********************************\n");
-
+  console.log(route);
 
 //AXIOS THEN RESPONSE CLOSING TAG. DO NOT DELETE.
 });
