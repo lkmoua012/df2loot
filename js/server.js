@@ -216,6 +216,13 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     }
   };
 
+  function generateRoute(){
+
+    console.log("There are " + route.length + " quests in the optimal route.");
+
+    
+  };
+
       /*
       Essentially, if a city is equal to another in the array, it'll place the quest ahead or below.
 
@@ -234,7 +241,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
   console.log("\n***********************************\n" +
             "Generating route based on locations...\n" +
             "\n***********************************\n");
-  console.log("There are " + route.length + " quests in the optimal route.");
+  generateRoute();
   console.log("\n***********************************\n" +
             "END\n" +
             "\n***********************************\n");
