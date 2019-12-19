@@ -40,7 +40,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
     };
 
     // If EXP is greater than 2500 and is not Extermination, push results.
-    if (Number(missionExp) < 250 && missionObj !== "Exterminate" && missionExp !== ""){
+    if (Number(missionExp) < 2500 && missionObj !== "Exterminate" && missionExp !== ""){
             results.push({
                 missionExp: missionExp,
                 missionCity: missionCity,
@@ -256,7 +256,7 @@ axios.get("https://www.df2haven.com/missions/").then(function(response) {
       Essentially, if a city is equal to another in the array, it'll place the quest ahead or below.
 
       -- Current Issue --
-      console log is correct, but the results are pushing and splicing incorrectly. need to find out how to track j and i.
+      need to find a way to sort the route array.
       */
 
 
